@@ -1,0 +1,25 @@
+{
+  "name": "BACKEND-SERVER",
+  "version": "1.0.0",
+  "description": "Backend de la aplicacion Spam Music",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Jose Antonio Martin",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.10.3"
+  }
+}
