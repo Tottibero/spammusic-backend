@@ -1,16 +1,14 @@
-const express = require('express');
 //Utilizamos dotenv para las variables de entorno que llamaremos con el process.env y que estan almacenadas en el .env de la raíz.
 require('dotenv').config();
+
+const express = require('express');
+const cors = require('cors');
+
 //Base de datos que cogemos del archivo config.js de la carpeta database
 const { dbConnection } = require('./database/config');
 
-const cors = require('cors');
-
-
-
 //Crear el servidor express
 const app = express();
-
 
 //Configruar CORS
 app.use(cors());
