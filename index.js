@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
+
 //Base de datos que cogemos del archivo config.js de la carpeta database
 const { dbConnection } = require('./database/config');
 
@@ -13,19 +14,20 @@ const app = express();
 //Configruar CORS
 app.use(cors());
 
+//Lectura y parseo del Body
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+
 //Llamamos a la función para conectarnos a la base de datos
 dbConnection();
 
 //Rutas
-app.get( '/' , (req, res) =>{
 
-    res.json({
-        ok:true,
-        msg: 'prueba'
-    });
-
-} );
-
+const userRoutes = require('./routes/users');
+app.use('/api/user', userRoutes);
 
 //Abrimos la conexión con el puerto de .ENV
 app.listen(process.env.PORT, () =>{
