@@ -20,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-
 //Llamamos a la función para conectarnos a la base de datos
 dbConnection();
 
@@ -28,6 +27,10 @@ dbConnection();
 
 const userRoutes = require('./routes/users');
 app.use('/api/user', userRoutes);
+
+const loginRoutes = require('./routes/auth');
+app.use('/api/login', loginRoutes);
+
 
 //Abrimos la conexión con el puerto de .ENV
 app.listen(process.env.PORT, () =>{

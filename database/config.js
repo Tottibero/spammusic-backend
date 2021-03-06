@@ -15,7 +15,8 @@ const dbConnection = async() => {
                 //Necesario para poder trabajar con indices.       
                 useUnifiedTopology: true, 
                 useNewUrlParser: true, 
-                useCreateIndex: true
+                useCreateIndex: true,
+                useFindAndModify: false
         });
 
         console.log('DB successfuly connected');
@@ -24,7 +25,7 @@ const dbConnection = async() => {
     } catch (error) {
 
         console.log(error);
-        throw new Error ('Error trying to connect to DB')
+        throw new Error ('Error trying to connect to DB');
         
     }
 

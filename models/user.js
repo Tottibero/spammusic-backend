@@ -5,7 +5,8 @@ const UserSchema = Schema({
 
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email: {
         type: String,
@@ -34,6 +35,10 @@ const UserSchema = Schema({
 });
 
 
+UserSchema.method('toJSON', function(){
+    const{password, ...object} = this.toObject();
+    return object;
+});
 
 
 module.exports = model('User', UserSchema);
