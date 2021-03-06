@@ -1,4 +1,4 @@
 
 node_modules/
-
+#Eliminamos el .env por seguridad para no hacer publica la JWT_KEY
 .env

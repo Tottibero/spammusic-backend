@@ -8,7 +8,7 @@ const generateJWT = (uid) => {
             uid
         };
     
-        jwt.sign( payload, process.env.JWT_SECRET, {
+        jwt.sign( payload, process.env.JWT_KEY, {
             expiresIn: '12h'
         }, (err, token) =>{
     
