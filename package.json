@@ -4,7 +4,9 @@
   "description": "Backend de la aplicacion Spam Music",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon index.js"
+    "prestart": "start  \"mongoServer\" \"c:Program Files/MongoDb/Server/4.0/bin/mongod.exe\"",
+    "start": "nodemon index.js",
+    "stop": "Taskkill /IM mongod.exe"
   },
   "keywords": [],
   "author": "Jose Antonio Martin",
