@@ -2,7 +2,7 @@ const {response} = require('express');
 const bcrypt = require('bcryptjs')
 const {validationResult} = require('express-validator');
 const User = require('../models/user');
-const { generateJWT } = require('../.vscode/helpers/jwt');
+const { generateJWT } = require('../helpers/jwt');
 
 
 const getUsers = async(req, res) =>{
