@@ -7,7 +7,7 @@ const { generateJWT } = require('../helpers/jwt');
 
 const getUsers = async(req, res) =>{
 
-    const users = await User.find({}, 'username email role google');
+    const users = await User.find({}, 'username email role google img');
     res.json({
         ok:true,
         users

@@ -25,6 +25,7 @@ router
 createUser)
 .put( '/:id' , 
 [
+    validateJWT,
     check('username', 'Username is required').not().isEmpty(),
     check('email', 'Email is required').isEmail(),
     validateFields

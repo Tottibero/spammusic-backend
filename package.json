@@ -4,23 +4,23 @@
   "description": "Backend de la aplicacion Spam Music",
   "main": "index.js",
   "scripts": {
-    "prestart": "start  \"mongoServer\" \"c:Program Files/MongoDb/Server/4.0/bin/mongod.exe\"",
-    "start": "nodemon index.js",
-    "stop": "Taskkill /IM mongod.exe"
+    "dev:prestart": "start  \"mongoServer\" \"c:Program Files/MongoDb/Server/4.0/bin/mongod.exe\"",
+    "dev:start": "nodemon index.js",
+    "dev:stop": "Taskkill /IM mongod.exe"
   },
   "keywords": [],
   "author": "Jose Antonio Martin",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.18"
+    "mongoose": "^5.11.18",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/mongoose": "^5.10.3"

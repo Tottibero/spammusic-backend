@@ -15,9 +15,8 @@ const app = express();
 app.use(cors());
 
 //Lectura y parseo del Body
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 //Llamamos a la función para conectarnos a la base de datos
@@ -30,6 +29,22 @@ app.use('/api/user', userRoutes);
 
 const loginRoutes = require('./routes/auth');
 app.use('/api/login', loginRoutes);
+
+const genreRoutes = require('./routes/genres');
+app.use('/api/genre', genreRoutes);
+
+const artistRoutes = require('./routes/artists');
+app.use('/api/artist', artistRoutes);
+
+const discRoutes = require('./routes/discs');
+app.use('/api/disc', discRoutes);
+
+const searchRoutes = require('./routes/search');
+app.use('/api/search', searchRoutes);
+
+const uploadRoutes = require('./routes/uploads');
+app.use('/api/upload', uploadRoutes);
+
 
 
 //Abrimos la conexión con el puerto de .ENV
