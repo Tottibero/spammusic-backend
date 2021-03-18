@@ -2,6 +2,8 @@ const {response} = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generateJWT } = require('../helpers/jwt');
+const { googleVerify } = require('../helpers/google-verify');
+const user = require('../models/user');
 
 
 const login = async(req, res = response) =>{
@@ -45,9 +47,67 @@ const login = async(req, res = response) =>{
         
     }
 
-}
+};
 
+const renewToken = async(req, res = response) =>{
+
+    const uid = req.uid;
+
+const token = await generateJWT(uid);    
+
+    res.json({
+        ok:true,
+        token
+    });
+
+};
+
+const googleSign = async(req, res = response) =>{
+
+    const googleToken = req.body.token;
+
+    try {
+
+        const {name, email, picture} = await googleVerify(googleToken);
+        
+        let user;
+
+        let username = name.replace(/\s/g, '.').toLowerCase();
+
+        const userMailDB = await User.findOne({email});
+
+        const usernameDB = await User.findOne({username});
+
+        if(!userMailDB && !username){
+        } else{
+            user = userMailDB;
+            user.google = true;
+        }
+
+        user.save();
+
+        const token = await generateJWT(user.id);
+
+        res.json({
+            ok: true,
+            msg: 'google',
+            usernameDB, email, picture, token
+        });
+
+
+
+    } catch (error) {
+        res.status(401).json({
+            ok: false,
+            msg: 'Token is not correct'
+        });
+    }
+
+
+};
 
 module.exports = {
-    login
-}
+    login,
+    renewToken,
+    googleSign
+};

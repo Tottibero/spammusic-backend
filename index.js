@@ -22,6 +22,9 @@ app.use(express.json());
 //Llamamos a la función para conectarnos a la base de datos
 dbConnection();
 
+//Directorio publico
+app.use(express.static('public'));
+
 //Rutas
 
 const userRoutes = require('./routes/users');

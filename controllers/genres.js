@@ -9,11 +9,6 @@ const getGenres = async(req, res) =>{
     const from = Number(req.query.from) || 0;
     
 
-    // const genres = await Genre.find()
-    //                           .skip(from)
-    //                           .limit(5);
-
-    // const total = await Genre.count();
 
     const [genres, total] =  await Promise.all([
         Genre.find()
@@ -61,12 +56,32 @@ const createGenre = async(req, res = response) =>{
 }
 
 const updateGenre = async(req, res = response) =>{
-        
+    
+    const genreId = req.params.id;
+    const uid = req.uid;
+
     try {
 
+        const genreDb = await Genre.findById();
+
+        if (!genreDb){
+            res.status(500).json({
+                ok: false,
+                msg: 'Genre not founded for that ID'
+            });
+    
+        }
+
+        const genreChanges = {
+            ...req.body,
+            user: uid
+        }
+
+        const genreUpdated = await Genre.findByIdAndUpdate(genreId, genreChanges, {new:true});
 
         res.json({
             ok:true,
+            genre: genreUpdated
         });
 
         
@@ -79,16 +94,29 @@ const updateGenre = async(req, res = response) =>{
     }
     
 
-}
+};
 
 const deleteGenre = async(req, res = response) =>{
-    const userId = req.params.id;
+
+    const genreId = req.params.id;
 
     try {
         
+        const genreDb = await Genre.findById();
+
+        if (!genreDb){
+            res.status(500).json({
+                ok: false,
+                msg: 'Genre not founded for that ID'
+            });
+    
+        }
+
+        await Genre.findByIdAndDelete(genreId);
 
         res.json({
             ok:true,
+            msg: 'Deleted genre.'
         });
 
 
@@ -100,11 +128,11 @@ const deleteGenre = async(req, res = response) =>{
             msg: 'Unexpeted error. See log for more info'
         });
     }
-}
+};
 
 module.exports = {
     getGenres,
     createGenre,
     updateGenre,
     deleteGenre
-}
+};
